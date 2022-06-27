@@ -1,16 +1,15 @@
-package me.protik.simplyblog.users;
+package me.protik.simplyblog.my_users;
 
 import me.protik.simplyblog.models.MyUsers;
-import org.hibernate.procedure.spi.ParameterRegistrationImplementor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Optional;
 
 @RestController
-public class UsersController {
+public class MyUsersController {
     @Autowired
-    private UsersService usersService;
+    private MyUsersService myUsersService;
 
     @GetMapping("/user")
     public String userHome(){
@@ -18,10 +17,10 @@ public class UsersController {
     }
     @GetMapping("/user/{id}")
     public Optional<MyUsers> showUser(@PathVariable String id){
-        return usersService.showUserService(id);
+        return myUsersService.showUserService(id);
     }
     @PostMapping("/user/add/")
     public void addUser(@RequestBody MyUsers user){
-        usersService.addUserService(user);
+        myUsersService.addUserService(user);
     }
 }
