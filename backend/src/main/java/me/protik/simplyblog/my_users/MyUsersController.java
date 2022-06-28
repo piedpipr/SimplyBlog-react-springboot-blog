@@ -23,4 +23,8 @@ public class MyUsersController {
     public void addUser(@RequestBody MyUsers user){
         myUsersService.addUserService(user);
     }
+    @GetMapping("/admin")
+    public String adminHome(){
+        return "Welcome Admin";
+    }
 }

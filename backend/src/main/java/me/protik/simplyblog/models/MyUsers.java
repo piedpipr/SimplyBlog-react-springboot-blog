@@ -5,15 +5,17 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
 @Getter @Setter @NoArgsConstructor @AllArgsConstructor
+@Table(name = "my_users")
 public class MyUsers {
     @Id
-    private Long id;
-    private String username;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Integer id;
+    private String userName;
     private String password;
-    private String role;
+    private String roles;
+    private boolean active;
 }
