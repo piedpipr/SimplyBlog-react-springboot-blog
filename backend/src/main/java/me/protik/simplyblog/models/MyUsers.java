@@ -13,7 +13,9 @@ import javax.persistence.*;
 public class MyUsers {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Integer id;
+    @Column(nullable = false)
+    private Long id;
+    @Column(nullable = false, unique = true)
     private String userName;
     private String password;
     private String roles;

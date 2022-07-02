@@ -16,7 +16,7 @@ public class MyUsersController {
         return "Welcome User";
     }
     @GetMapping("/user/{id}")
-    public Optional<MyUsers> showUser(@PathVariable String id){
+    public Optional<MyUsers> showUser(@PathVariable Long id){
         return myUsersService.showUserService(id);
     }
     @PostMapping("/user/add/")
