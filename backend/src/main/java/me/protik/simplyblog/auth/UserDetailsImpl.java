@@ -1,4 +1,4 @@
-package me.protik.simplyblog.my_users_details_auth;
+package me.protik.simplyblog.auth;
 
 import me.protik.simplyblog.models.MyUsers;
 import org.springframework.security.core.GrantedAuthority;
@@ -10,13 +10,13 @@ import java.util.Collection;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class MyUsersDetails implements UserDetails {
+public class UserDetailsImpl implements UserDetails {
     private String userName;
     private String password;
     private boolean active;
     private List<GrantedAuthority> authorities;
 
-    public MyUsersDetails(MyUsers user) {
+    public UserDetailsImpl(MyUsers user) {
         this.userName = user.getUserName();
         this.password = user.getPassword();
         this.active = user.isActive();
@@ -24,7 +24,7 @@ public class MyUsersDetails implements UserDetails {
                 .map(SimpleGrantedAuthority::new)
                 .collect(Collectors.toList());
     }
-    public MyUsersDetails() {
+    public UserDetailsImpl() {
     }
 
 

@@ -1,10 +1,10 @@
-package me.protik.simplyblog.my_users_details_auth;
+package me.protik.simplyblog.auth;
 
 import me.protik.simplyblog.models.MyUsers;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Optional;
 
-public interface MyUsersDetailsRepository extends JpaRepository<MyUsers, Long> {
+public interface UserDetailsRepository extends JpaRepository<MyUsers, Long> {
     Optional<MyUsers> findMyUsersByUserName(String userName);
 }
