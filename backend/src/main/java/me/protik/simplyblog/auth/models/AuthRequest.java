@@ -1,4 +1,4 @@
-package me.protik.simplyblog.auth;
+package me.protik.simplyblog.auth.models;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

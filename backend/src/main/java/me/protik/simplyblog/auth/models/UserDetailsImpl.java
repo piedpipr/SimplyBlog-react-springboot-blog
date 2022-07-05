@@ -1,4 +1,4 @@
-package me.protik.simplyblog.auth;
+package me.protik.simplyblog.auth.models;
 
 import me.protik.simplyblog.models.MyUsers;
 import org.springframework.security.core.GrantedAuthority;

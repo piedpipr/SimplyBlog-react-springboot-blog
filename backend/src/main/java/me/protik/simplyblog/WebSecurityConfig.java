@@ -36,8 +36,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/register").permitAll()
                 .antMatchers("/authentication").permitAll()
                 .antMatchers("/authentication1").permitAll()
-                .antMatchers("/").permitAll()
-                .and().formLogin();
+                .antMatchers("/").permitAll();
+//                .and().formLogin();
     }
     @Bean
     public PasswordEncoder getPasswordEncoder() { return NoOpPasswordEncoder.getInstance();}

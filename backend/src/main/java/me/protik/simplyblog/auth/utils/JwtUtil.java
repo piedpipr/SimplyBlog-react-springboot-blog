@@ -1,4 +1,4 @@
-package me.protik.simplyblog.auth;
+package me.protik.simplyblog.auth.utils;
 
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;

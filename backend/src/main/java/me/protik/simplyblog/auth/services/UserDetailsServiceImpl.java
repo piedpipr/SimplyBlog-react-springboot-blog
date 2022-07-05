@@ -1,6 +1,8 @@
-package me.protik.simplyblog.auth;
+package me.protik.simplyblog.auth.services;
 
 
+import me.protik.simplyblog.auth.UserDetailsRepository;
+import me.protik.simplyblog.auth.models.UserDetailsImpl;
 import me.protik.simplyblog.models.MyUsers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -14,7 +16,7 @@ import java.util.Optional;
 public class UserDetailsServiceImpl implements UserDetailsService {
 
     @Autowired
-    private UserDetailsRepository UserDetailsRepository;
+    private me.protik.simplyblog.auth.UserDetailsRepository UserDetailsRepository;
 
     @Override
     public UserDetails loadUserByUsername(String userName) throws UsernameNotFoundException {
