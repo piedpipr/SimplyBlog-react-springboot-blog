@@ -1,5 +1,6 @@
 package me.protik.simplyblog.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -15,12 +16,13 @@ public class MyUsers {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(nullable = false)
-    private Long userId;
+    private Long id;
     @Column(nullable = false, unique = true)
     private String userName;
     private String password;
     private String roles;
     private boolean active;
-    @OneToMany
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "myUsers", cascade = CascadeType.ALL)
+    @JsonIgnore
     private List<Blogs> blogs;
 }

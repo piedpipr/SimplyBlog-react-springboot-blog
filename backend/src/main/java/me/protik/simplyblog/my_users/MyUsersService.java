@@ -13,10 +13,10 @@ public class MyUsersService {
     public void addUserService(MyUsers user){
         myUsersRepository.save(user);
     }
-    public Optional<MyUsers> showUserService(Long userId){
-        return myUsersRepository.findById(userId);
+    public Optional<MyUsers> showUserService(Long id){
+        return myUsersRepository.findById(id);
     }
-    public Optional<MyUsers> myUsersDetailsService(Long userId){
-        return myUsersRepository.findById(userId);
+    public Optional<MyUsers> myUsersDetailsService(Long id){
+        return myUsersRepository.findById(id);
     }
 }

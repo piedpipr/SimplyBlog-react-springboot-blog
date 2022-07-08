@@ -15,9 +15,9 @@ public class MyUsersController {
     public String userHome(){
         return "Welcome User";
     }
-    @GetMapping("/user/{userId}")
-    public Optional<MyUsers> showUser(@PathVariable Long userId){
-        return myUsersService.showUserService(userId);
+    @GetMapping("/user/{id}")
+    public Optional<MyUsers> showUser(@PathVariable Long id){
+        return myUsersService.showUserService(id);
     }
     @PostMapping("/user/add/")
     public void addUser(@RequestBody MyUsers user){
