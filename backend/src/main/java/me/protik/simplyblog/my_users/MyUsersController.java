@@ -1,5 +1,6 @@
 package me.protik.simplyblog.my_users;
 
+import java.security.Principal;
 import me.protik.simplyblog.models.MyUsers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -11,6 +12,10 @@ public class MyUsersController {
     @Autowired
     private MyUsersService myUsersService;
 
+    @GetMapping("/user/profile")
+    Optional<MyUsers> userProfile(Principal principal){
+        return myUsersService.showMyProfile(principal.getName());
+    }
     @GetMapping("/user")
     public String userHome(){
         return "Welcome User";

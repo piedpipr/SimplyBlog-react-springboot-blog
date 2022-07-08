@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.annotations.ColumnDefault;
 
 import javax.persistence.*;
 import java.util.List;
@@ -20,6 +21,10 @@ public class MyUsers {
     @Column(nullable = false, unique = true)
     private String userName;
     private String password;
+    @Column(unique = true)
+    private String email;
+    private String bio;
+    @ColumnDefault("ROLE_USER")
     private String roles;
     private boolean active;
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "myUsers", cascade = CascadeType.ALL)

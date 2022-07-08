@@ -10,6 +10,10 @@ import java.util.Optional;
 public class MyUsersService {
     @Autowired
     private MyUsersRepository myUsersRepository;
+
+    public Optional<MyUsers> showMyProfile(String userName){
+        return myUsersRepository.findMyUsersByUserName(userName);
+    }
     public void addUserService(MyUsers user){
         myUsersRepository.save(user);
     }
