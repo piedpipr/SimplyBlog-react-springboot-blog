@@ -16,7 +16,7 @@ import java.util.Optional;
 public class UserDetailsServiceImpl implements UserDetailsService {
 
     @Autowired
-    private me.protik.simplyblog.auth.UserDetailsRepository UserDetailsRepository;
+    private UserDetailsRepository UserDetailsRepository;
 
     @Override
     public UserDetails loadUserByUsername(String userName) throws UsernameNotFoundException {

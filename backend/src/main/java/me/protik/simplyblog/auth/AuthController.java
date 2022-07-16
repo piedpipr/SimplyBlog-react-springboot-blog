@@ -9,10 +9,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
 
 @RestController
 public class AuthController {
@@ -23,6 +21,10 @@ public class AuthController {
     @Autowired
     AuthenticationManager authenticationManager;
 
+    @GetMapping("/usernamecheck/{userName}")
+    public boolean authUsernameCheck(@PathVariable String userName){
+        return userDetailsRepository.existsByUserName(userName);
+    }
     @PostMapping("/register")
     public void authRegister(@RequestBody MyUsers regUser){
         userDetailsRepository.save(regUser);
@@ -38,8 +40,5 @@ public class AuthController {
         String jwt = jwtUtil.generateJWT(userDetailsRepository.findMyUsersByUserName(authRequest.getUserName()));
         return ResponseEntity.ok(new AuthResponse(jwt));
     }
-    @GetMapping("/authenticate1")
-    public String auth(){
-        return "Auth Page Test";
-    }
+
 }
