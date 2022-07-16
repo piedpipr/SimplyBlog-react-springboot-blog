@@ -11,6 +11,10 @@ import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.web.bind.annotation.*;
 
+import java.security.Principal;
+import java.util.ArrayList;
+import java.util.List;
+
 
 @RestController
 public class AuthController {
@@ -24,6 +28,10 @@ public class AuthController {
     @GetMapping("/usernamecheck/{userName}")
     public boolean authUsernameCheck(@PathVariable String userName){
         return userDetailsRepository.existsByUserName(userName);
+    }
+    @GetMapping("/verifyjwt")
+    public String verifyJWT(Principal principal){
+        return principal.getName();
     }
     @PostMapping("/register")
     public void authRegister(@RequestBody MyUsers regUser){
