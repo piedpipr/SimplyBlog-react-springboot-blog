@@ -1,10 +1,13 @@
 package me.protik.simplyblog.my_users;
 
 import java.security.Principal;
+
+import me.protik.simplyblog.models.Connections;
 import me.protik.simplyblog.models.MyUsers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Optional;
 
 @RestController
@@ -12,14 +15,34 @@ public class MyUsersController {
     @Autowired
     private MyUsersService myUsersService;
 
-    @GetMapping("/user/profile")
+
+    //User APIs
+    @GetMapping("/user/profile") //Private User Profile
     Optional<MyUsers> userProfile(Principal principal){
-        return myUsersService.showUserbyUserNameService(principal.getName());
+        return myUsersService.showUserByUserNameService(principal.getName());
     }
-    @GetMapping("/user/{userName}")
+    @GetMapping("/user/{userName}") //Public User Profile
     public Optional<MyUsers> publicProfile(@PathVariable String userName){
-        return myUsersService.showUserbyUserNameService(userName);
+        return myUsersService.showUserByUserNameService(userName);
     }
+
+
+    //Connections APIs
+    @GetMapping("/user/connections/{userName}")
+    public List<Connections> userConnections(@PathVariable String userName){
+        return myUsersService.showUserConnectionsListService(userName);
+    }
+    @GetMapping("/user/pending-connections/{userName}")
+    public List<Connections> userConnectionsPending(@PathVariable String userName){
+        return myUsersService.showUserPendingListService(userName);
+    }
+    @GetMapping("/user/followers/{userName}")
+    public List<Connections> userFollowers(@PathVariable String userName){
+        return myUsersService.showUserFollowersListService(userName);
+    }
+
+
+    //TEST APIs
     @GetMapping("/user")
     public String userHome(){
         return "Welcome User";
