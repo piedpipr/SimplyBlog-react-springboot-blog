@@ -30,4 +30,7 @@ public class MyUsers {
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "myUsers", cascade = CascadeType.ALL)
     @JsonIgnore
     private List<Blogs> blogs;
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "receiver", cascade = CascadeType.ALL)
+    @JsonIgnore
+    private List<Connections> connections;
 }
