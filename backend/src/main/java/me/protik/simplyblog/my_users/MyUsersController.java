@@ -14,16 +14,17 @@ public class MyUsersController {
 
     @GetMapping("/user/profile")
     Optional<MyUsers> userProfile(Principal principal){
-        return myUsersService.showMyProfile(principal.getName());
+        return myUsersService.showUserbyUserNameService(principal.getName());
+    }
+    @GetMapping("/user/{userName}")
+    public Optional<MyUsers> publicProfile(@PathVariable String userName){
+        return myUsersService.showUserbyUserNameService(userName);
     }
     @GetMapping("/user")
     public String userHome(){
         return "Welcome User";
     }
-    @GetMapping("/user/{id}")
-    public Optional<MyUsers> showUser(@PathVariable Long id){
-        return myUsersService.showUserService(id);
-    }
+
     @PostMapping("/user/add/")
     public void addUser(@RequestBody MyUsers user){
         myUsersService.addUserService(user);

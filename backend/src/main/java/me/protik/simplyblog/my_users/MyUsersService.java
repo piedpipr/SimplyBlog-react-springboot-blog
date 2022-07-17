@@ -11,16 +11,14 @@ public class MyUsersService {
     @Autowired
     private MyUsersRepository myUsersRepository;
 
-    public Optional<MyUsers> showMyProfile(String userName){
+    public Optional<MyUsers> showUserbyUserNameService(String userName){
         return myUsersRepository.findMyUsersByUserName(userName);
+    }
+    public Optional<MyUsers> showUserbyIdService(Long id){
+        return myUsersRepository.findById(id);
     }
     public void addUserService(MyUsers user){
         myUsersRepository.save(user);
     }
-    public Optional<MyUsers> showUserService(Long id){
-        return myUsersRepository.findById(id);
-    }
-    public Optional<MyUsers> myUsersDetailsService(Long id){
-        return myUsersRepository.findById(id);
-    }
+
 }
