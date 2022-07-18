@@ -8,6 +8,7 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Getter @Setter @NoArgsConstructor @AllArgsConstructor
@@ -23,4 +24,8 @@ public class Blogs {
     @JoinColumn( name= "my_users_id", nullable = false)
     @JsonIgnore
     private MyUsers myUsers;
+
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "blog", cascade = CascadeType.ALL)
+    @JsonIgnore
+    private List<BlogsLikes> likesUnlikes;
 }

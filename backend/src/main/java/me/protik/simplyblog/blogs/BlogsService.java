@@ -12,10 +12,19 @@ public class BlogsService {
     @Autowired
     BlogsRepository blogsRepository;
 
+    List<Blogs>  getAllBlogs(){
+        List<Blogs> allBlogs = new ArrayList<>();
+        blogsRepository.findAll().forEach(allBlogs::add);
+        return allBlogs;
+    }
     List<Blogs>  getUserBlogs(Long id){
         List<Blogs> allUserBlogs = new ArrayList<>();
         blogsRepository.findAllByMyUsers_Id(id).forEach(allUserBlogs::add);
         return allUserBlogs;
     }
+    void addBlog(Blogs blog){
+        blogsRepository.save(blog);
+    }
+
 }
 
