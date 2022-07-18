@@ -4,6 +4,7 @@ import me.protik.simplyblog.models.Connections;
 import me.protik.simplyblog.models.MyUsers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.List;
 import java.util.Optional;
@@ -18,14 +19,15 @@ public class MyUsersService {
     public Optional<MyUsers> showUserByUserNameService(String userName){
         return myUsersRepository.findMyUsersByUserName(userName);
     }
-    public Optional<MyUsers> showUserByIdService(Long id){
-        return myUsersRepository.findById(id);
+    public MyUsers showUserByIdService(Long id){
+        return myUsersRepository.findMyUsersById(id);
     }
     public void addUserService(MyUsers user){
         myUsersRepository.save(user);
     }
 
 //User Connections Services
+    //GET APIs
     public List<Connections> showUserConnectionsListService(String userName){
         return connectionsRepository.findConnectionsByReceiver_UserNameAndAcceptedTrue(userName);
     }
@@ -34,6 +36,10 @@ public class MyUsersService {
     }
     public List<Connections> showUserFollowersListService(String userName){
         return connectionsRepository.findConnectionsByReceiver_UserNameAndFollowingIsTrue(userName);
+    }
+    //POST APIs
+    public void addModConnectionService(Connections connection){
+        connectionsRepository.save(connection);
     }
 
 }
