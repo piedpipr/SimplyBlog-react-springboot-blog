@@ -1,6 +1,7 @@
 package me.protik.simplyblog.blogs;
 
-import me.protik.simplyblog.models.Blogs;
+import me.protik.simplyblog.models.*;
+import me.protik.simplyblog.my_users.MyUsersService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -10,6 +11,10 @@ import java.util.List;
 public class BlogsController {
     @Autowired
     private BlogsService blogsService;
+    @Autowired
+    private MyUsersService myUsersService;
+
+    //Blogs APIs
     @GetMapping("/blogs")
     public List<Blogs> showAllBlogs(){
         return blogsService.getAllBlogs();
@@ -20,7 +25,29 @@ public class BlogsController {
     }
 
     @PostMapping("/blogs/add")
-    void addBlog(@RequestBody Blogs blog){
+    public void addBlog(@RequestBody Blogs blog){
         blogsService.addBlog(blog);
+    }
+
+    //BlogLikes APIs
+    @PostMapping("/blogs/likeunlike")
+    void addLikeUnlike(@RequestBody BlogsLikesWrapper blogsLikesWrapper){
+        BlogsLikes blogsLike = new BlogsLikes();
+        blogsLike.setBlog(blogsService.getBlogByIdService(blogsLikesWrapper.getBlogId()));
+        blogsLike.setLikedBy(myUsersService.showUserByIdService(blogsLikesWrapper.getLikedBy()));
+        blogsLike.setUnlikedBy(myUsersService.showUserByIdService(blogsLikesWrapper.getUnlikedBy()));
+        blogsService.addLikeUnlikeService(blogsLike);
+    }
+    @GetMapping("/blogs/likes/{id}")
+    Integer noOfLikesBlog(@PathVariable Long id){
+        return blogsService.noOfLikes(id);
+    }
+    @GetMapping("/blogs/unlikes/{id}")
+    Integer noOfUnlikesBlog(@PathVariable Long id){
+        return blogsService.noOfUnLikesTest(id);
+    }
+    @GetMapping("/blogs/get")
+    List<BlogsLikes> getAllBlogLikes(){
+        return blogsService.allBlogLikes();
     }
 }
