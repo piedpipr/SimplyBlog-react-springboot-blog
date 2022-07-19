@@ -8,7 +8,7 @@ import lombok.Setter;
 import java.io.Serializable;
 
 @Getter@Setter@AllArgsConstructor@NoArgsConstructor
-public class ConnectionsWrapper implements Serializable {
+public class ConnectionsWrapper implements Serializable{
     private Long receiver;
     private Long sender;
     private boolean accepted;
