@@ -31,12 +31,8 @@ public class BlogsController {
 
     //BlogLikes APIs
     @PostMapping("/blogs/likeunlike")
-    void addLikeUnlike(@RequestBody BlogsLikesWrapper blogsLikesWrapper){
-        BlogsLikes blogsLike = new BlogsLikes();
-        blogsLike.setBlog(blogsService.getBlogByIdService(blogsLikesWrapper.getBlogId()));
-        blogsLike.setLikedBy(myUsersService.showUserByIdService(blogsLikesWrapper.getLikedBy()));
-        blogsLike.setUnlikedBy(myUsersService.showUserByIdService(blogsLikesWrapper.getUnlikedBy()));
-        blogsService.addLikeUnlikeService(blogsLike);
+    void addLikeUnlikeTest(@RequestBody BlogsLikes blogsLikes){
+        blogsService.addLikeUnlikeService(blogsLikes);
     }
     @GetMapping("/blogs/likes/{id}")
     Integer noOfLikesBlog(@PathVariable Long id){
