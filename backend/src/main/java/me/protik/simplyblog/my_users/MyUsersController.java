@@ -3,12 +3,10 @@ package me.protik.simplyblog.my_users;
 import java.security.Principal;
 
 import me.protik.simplyblog.models.Connections;
-import me.protik.simplyblog.models.ConnectionsWrapper;
 import me.protik.simplyblog.models.MyUsers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -43,12 +41,7 @@ public class MyUsersController {
         return myUsersService.showUserFollowersListService(userName);
     }
     @PostMapping("/user/connections/add")
-    public void addModConnection(@RequestBody ConnectionsWrapper connectionsWrapper){
-        Connections connection = new Connections();
-        connection.setReceiver(myUsersService.showUserByIdService(connectionsWrapper.getReceiver()));
-        connection.setSender(myUsersService.showUserByIdService(connectionsWrapper.getSender()));
-        connection.setAccepted(connectionsWrapper.isAccepted());
-        connection.setFollowing(connection.isFollowing());
+    public void addModConnection(@RequestBody Connections connection){
         myUsersService.addModConnectionService(connection);
     }
 

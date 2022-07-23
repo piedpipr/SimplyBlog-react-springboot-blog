@@ -15,10 +15,10 @@ public class Connections implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
     @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     private MyUsers receiver;
-    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
     @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     private MyUsers sender;
     private boolean accepted;
