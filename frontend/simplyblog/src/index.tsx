@@ -6,6 +6,9 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import {AuthProvider} from './context/AuthProvider';
 import reportWebVitals from './reportWebVitals';
 
+// Importing the Bootstrap CSS
+import 'bootstrap/dist/css/bootstrap.min.css'; 
+
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );
