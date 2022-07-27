@@ -49,4 +49,4 @@ export const AuthProvider = ({ children }: Props) => {
     );
 }
 
-export default AuthProvider;
+export default AuthContext;
