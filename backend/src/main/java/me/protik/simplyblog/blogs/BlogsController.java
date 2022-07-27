@@ -34,19 +34,23 @@ public class BlogsController {
     }
 
     //BlogLikes APIs
-    @PostMapping("/blogs/likeunlike")
+    @GetMapping("/blogs/{id}/{userName}") //Get Like Status of User For A Particular Blog
+    BlogsLikes getBlogUserLikeStatus(@PathVariable Long id, @PathVariable String userName){
+        return blogsService.blogLikeStatus(id, userName, userName);
+    }
+    @PostMapping("/blogs/likeunlike") // Add/Modify User Like On A Blog
     void addLikeUnlikeTest(@RequestBody BlogsLikes blogsLikes){
         blogsService.addLikeUnlikeService(blogsLikes);
     }
-    @GetMapping("/blogs/likes/{id}")
+    @GetMapping("/blogs/likes/{id}") // No Of Unlikes Received By A Blog
     Integer noOfLikesBlog(@PathVariable Long id){
         return blogsService.noOfLikes(id);
     }
-    @GetMapping("/blogs/unlikes/{id}")
+    @GetMapping("/blogs/unlikes/{id}") // No Of Likes Received By A Blog
     Integer noOfUnlikesBlog(@PathVariable Long id){
         return blogsService.noOfUnLikes(id);
     }
-    @GetMapping("/blogs/get")
+    @GetMapping("/blogs/get") // Get All BlogLikes Objects
     List<BlogsLikes> getAllBlogLikes(){
         return blogsService.allBlogLikes();
     }

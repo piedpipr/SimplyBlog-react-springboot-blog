@@ -16,55 +16,60 @@ public class BlogsService {
     @Autowired
     BlogsLikesRepository blogsLikesRepository;
 
-    //Blog Services
-    Blogs getBlogByIdService(Long id){
+    // Blog Services
+    Blogs getBlogByIdService(Long id) {
         return blogsRepository.findBlogsById(id);
     }
-    List<Blogs>  getAllBlogs(){
+
+    List<Blogs> getAllBlogs() {
         List<Blogs> allBlogs = new ArrayList<>();
         blogsRepository.findAll().forEach(allBlogs::add);
         return allBlogs;
     }
-    List<Blogs>  getUserBlogs(String userName){
+
+    List<Blogs> getUserBlogs(String userName) {
         List<Blogs> allUserBlogs = new ArrayList<>();
         blogsRepository.findAllByMyUsers_UserName(userName).forEach(allUserBlogs::add);
         return allUserBlogs;
     }
-    void addBlog(Blogs blog){
+
+    void addBlog(Blogs blog) {
         blogsRepository.save(blog);
     }
 
-    //BlogLikes Sevices
-    void addLikeUnlikeService(BlogsLikes bloglike){
+    // BlogLikes Sevices
+    BlogsLikes blogLikeStatus(Long blogId, String userName, String userNameSame){
+        return blogsLikesRepository
+                .findBlogsLikesByBlog_IdAndLikedBy_UserNameOrUnlikedBy_UserName(blogId, userName, userNameSame);
+    }
+    void addLikeUnlikeService(BlogsLikes bloglike) {
         blogsLikesRepository.save(bloglike);
     }
-    Integer noOfLikes( Long blogId ){
+
+    Integer noOfLikes(Long blogId) {
         AtomicReference<Integer> count = new AtomicReference<>(0);
         blogsLikesRepository.findAllByBlog_Id(blogId)
-                .forEach((blogsLikes) -> {if(blogsLikes.getLikedBy()!=null) {
-                    count.updateAndGet(v -> v + 1);
-                }});
-                return count.get();
-    }
-    Integer noOfUnLikes( Long blogId ){
-        AtomicReference<Integer> count = new AtomicReference<>(0);
-        blogsLikesRepository.findAllByBlog_Id(blogId)
-                .forEach((blogsLikes) -> {if(blogsLikes.getUnlikedBy()!=null) {
-                    count.updateAndGet(v -> v + 1);
-                }});
+                .forEach((blogsLikes) -> {
+                    if (blogsLikes.getLikedBy() != null) {
+                        count.updateAndGet(v -> v + 1);
+                    }
+                });
         return count.get();
     }
-    Integer noOfUnLikesTest( Long blogId ){
+
+    Integer noOfUnLikes(Long blogId) {
         AtomicReference<Integer> count = new AtomicReference<>(0);
         blogsLikesRepository.findAllByBlog_Id(blogId)
-                .forEach((blogsLikes) -> count.updateAndGet(v -> v + 1));
+                .forEach((blogsLikes) -> {
+                    if (blogsLikes.getUnlikedBy() != null) {
+                        count.updateAndGet(v -> v + 1);
+                    }
+                });
         return count.get();
     }
-    List<BlogsLikes> allBlogLikes(){
+
+    List<BlogsLikes> allBlogLikes() {
         return blogsLikesRepository.findAll();
     }
 
-
-
 }
-
