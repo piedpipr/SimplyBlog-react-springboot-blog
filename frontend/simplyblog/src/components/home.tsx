@@ -1,6 +1,9 @@
 import {useEffect, useState} from 'react'
+import { LinkContainer } from 'react-router-bootstrap';
 import { Card } from 'react-bootstrap';
 import axios from '../api/axios';
+import Blog from './blog';
+import { Link } from 'react-router-dom';
 const PUBLIC_BLOGS_API = '/blogs';
 
 type Props = {}
@@ -32,7 +35,9 @@ export default function Home({}: Props) {
       <div className="container d-flex flex-wrap justify-content-center">
 {blogsdata.map((blog) => 
     <div>
+      <Link to={`/blog/${blog.id}`} style={{textDecoration: 'none'}}>
       <Card
+        onClick={() => {<Blog />}}
         bg='light'
         key={blog.id}
         text='dark'
@@ -48,6 +53,7 @@ export default function Home({}: Props) {
           </Card.Text>
         </Card.Body>
       </Card>
+      </Link>
     </div>
 )}
   </div></div>
