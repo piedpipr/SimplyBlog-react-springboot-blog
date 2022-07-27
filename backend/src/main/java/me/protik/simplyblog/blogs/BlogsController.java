@@ -15,13 +15,17 @@ public class BlogsController {
     private MyUsersService myUsersService;
 
     //Blogs APIs
+    @GetMapping("/blogs/show/{id}")
+    public Blogs showABlogById(@PathVariable Long id){
+        return blogsService.getBlogByIdService(id);
+    }
     @GetMapping("/blogs")
     public List<Blogs> showAllBlogs(){
         return blogsService.getAllBlogs();
     }
-    @GetMapping("/blogs/{id}")
-    public List<Blogs> showAllUserBlogs(@PathVariable Long id){
-        return blogsService.getUserBlogs(id);
+    @GetMapping("/blogs/{userName}")
+    public List<Blogs> showAllUserBlogs(@PathVariable String userName){
+        return blogsService.getUserBlogs(userName);
     }
 
     @PostMapping("/blogs/add")

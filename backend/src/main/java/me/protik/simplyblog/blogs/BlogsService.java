@@ -25,9 +25,9 @@ public class BlogsService {
         blogsRepository.findAll().forEach(allBlogs::add);
         return allBlogs;
     }
-    List<Blogs>  getUserBlogs(Long id){
+    List<Blogs>  getUserBlogs(String userName){
         List<Blogs> allUserBlogs = new ArrayList<>();
-        blogsRepository.findAllByMyUsers_Id(id).forEach(allUserBlogs::add);
+        blogsRepository.findAllByMyUsers_UserName(userName).forEach(allUserBlogs::add);
         return allUserBlogs;
     }
     void addBlog(Blogs blog){
