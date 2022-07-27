@@ -44,7 +44,7 @@ public class BlogsController {
     }
     @GetMapping("/blogs/unlikes/{id}")
     Integer noOfUnlikesBlog(@PathVariable Long id){
-        return blogsService.noOfUnLikesTest(id);
+        return blogsService.noOfUnLikes(id);
     }
     @GetMapping("/blogs/get")
     List<BlogsLikes> getAllBlogLikes(){
