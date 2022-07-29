@@ -55,7 +55,7 @@ export default function Blog(){
         setLikeStatus(response.data);
     }
     likeStatus();
-}}, [blogId, userAuth.isAuthenticated]);
+}}, [blogId, userAuth.isAuthenticated, isLikedUnliked]);
 
     const handleLikeUnlike = async(status: string) => {
     //   await axios.post(BLOG_ADD_LIKEUNLIKE_API, {
@@ -72,31 +72,29 @@ export default function Blog(){
           blog: {id: blogId},
           likedBy: {id: userAuth.userId}
       })
-        setIsLikedUnliked(true);
+        setIsLikedUnliked(!isLikedUnliked);
       } else {
         await axios.post(BLOG_ADD_LIKEUNLIKE_API, {
           blog: {id: blogId},
           likedBy: {id: userAuth.userId}
       })
-        setIsLikedUnliked(true);
+        setIsLikedUnliked(!isLikedUnliked);
       }
     } else if(status === 'unlike'){
-      if(likeStatus?.id){
         if(likeStatus?.id){
           await axios.post(BLOG_REMOVE_LIKEUNLIKE_API+likeStatus.id);
           await axios.post(BLOG_ADD_LIKEUNLIKE_API, {
             blog: {id: blogId},
             unlikedBy: {id: userAuth.userId}
         })
-          setIsLikedUnliked(true);
+          setIsLikedUnliked(!isLikedUnliked);
         } else {
           await axios.post(BLOG_ADD_LIKEUNLIKE_API, {
             blog: {id: blogId},
             unlikedBy: {id: userAuth.userId}
         })
-          setIsLikedUnliked(true);
+          setIsLikedUnliked(!isLikedUnliked);
         }
-    }
   }
 
 
