@@ -11,12 +11,15 @@ import { faThumbsUp, faThumbsDown } from '@fortawesome/free-solid-svg-icons';
 const PUBLIC_SINGLE_BLOG_API = '/blogs/show/';
 const BLOG_LIKES_API = '/blogs/likes/';
 const BLOG_UNLIKES_API = '/blogs/unlikes/';
+const BLOG_ADD_LIKEUNLIKE_API = '/blogs/likeunlike/';
+const BLOG_REMOVE_LIKEUNLIKE_API = '/blogs/likeunlike/remove/';
 
 export default function Blog(){
     const [blogdata, setBlogdata] = useState<BlogType>();
     const [likes, setLikes] = useState(0);
     const [unlikes, setUnlikes] = useState(0);
     const [likeStatus, setLikeStatus] = useState<LikeStatusType>();
+    const [isLikedUnliked, setIsLikedUnliked] = useState(false);
     let blogId = useParams().id;
     let userAuth = useAuth();
 
@@ -35,7 +38,7 @@ export default function Blog(){
           console.log(response.data);
       }
       getBlogLikes();
-  }, [blogId]);
+  }, [blogId, isLikedUnliked]);
     useEffect(()=> {
       const getBlogUnLikes = async() => {
           const response = await axios.get(BLOG_UNLIKES_API+blogId);
@@ -43,7 +46,7 @@ export default function Blog(){
           console.log(response.data);
       }
       getBlogUnLikes();
-  }, [blogId]);
+  }, [blogId, isLikedUnliked]);
   useEffect(()=> {
     if(userAuth.isAuthenticated){
     const likeStatus = async() => {
@@ -53,6 +56,52 @@ export default function Blog(){
     }
     likeStatus();
 }}, [blogId, userAuth.isAuthenticated]);
+
+    const handleLikeUnlike = async(status: string) => {
+    //   await axios.post(BLOG_ADD_LIKEUNLIKE_API, {
+    //     blog: {id: blogId},
+    //     likedBy: {id: 1}
+    // })
+    // setIsLikedUnliked(!isLikedUnliked);
+
+
+      if(status === 'like'){
+        if(likeStatus?.id){
+        await axios.post(BLOG_REMOVE_LIKEUNLIKE_API+likeStatus.id);
+        await axios.post(BLOG_ADD_LIKEUNLIKE_API, {
+          blog: {id: blogId},
+          likedBy: {id: userAuth.userId}
+      })
+        setIsLikedUnliked(true);
+      } else {
+        await axios.post(BLOG_ADD_LIKEUNLIKE_API, {
+          blog: {id: blogId},
+          likedBy: {id: userAuth.userId}
+      })
+        setIsLikedUnliked(true);
+      }
+    } else if(status === 'unlike'){
+      if(likeStatus?.id){
+        if(likeStatus?.id){
+          await axios.post(BLOG_REMOVE_LIKEUNLIKE_API+likeStatus.id);
+          await axios.post(BLOG_ADD_LIKEUNLIKE_API, {
+            blog: {id: blogId},
+            unlikedBy: {id: userAuth.userId}
+        })
+          setIsLikedUnliked(true);
+        } else {
+          await axios.post(BLOG_ADD_LIKEUNLIKE_API, {
+            blog: {id: blogId},
+            unlikedBy: {id: userAuth.userId}
+        })
+          setIsLikedUnliked(true);
+        }
+    }
+  }
+
+
+  }
+
   return (
     <div>
       <div className="p-5 mb-4 bg-light rounded-3">
@@ -71,12 +120,14 @@ export default function Blog(){
         <p className="col-md-8 fs-4 mt-5">{blogdata?.body}</p>
         <button
           className="btn btn-primary btn-sm me-2"
+          onClick={()=> handleLikeUnlike('like')}
           disabled={(likeStatus?.likedBy?.userName===userAuth.username)?true:false} 
           type="button"
           >{likes} Like <FontAwesomeIcon icon={faThumbsUp} />
         </button>
         <button
           className="btn btn-secondary btn-sm"
+          onClick={()=> handleLikeUnlike('unlike')}
           disabled={(likeStatus?.unlikedBy?.userName===userAuth.username)?true:false}
           type="button">
           {unlikes} Unlike <FontAwesomeIcon icon={faThumbsDown} />
