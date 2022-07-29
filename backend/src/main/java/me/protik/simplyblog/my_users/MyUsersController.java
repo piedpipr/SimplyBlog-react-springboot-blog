@@ -2,6 +2,7 @@ package me.protik.simplyblog.my_users;
 
 import java.security.Principal;
 
+import com.fasterxml.jackson.databind.node.ObjectNode;
 import me.protik.simplyblog.models.Connections;
 import me.protik.simplyblog.models.MyUsers;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,6 +44,17 @@ public class MyUsersController {
     @PostMapping("/user/connections/add")
     public void addModConnection(@RequestBody Connections connection){
         myUsersService.addModConnectionService(connection);
+    }
+    @GetMapping("user/connections/remove/{id}")
+     public void removeConnection(@PathVariable Long id){
+        myUsersService.removeConnectionService(id);
+     }
+
+    @PostMapping("/user/connections/status")
+    public Connections connectionStatus(@RequestBody ObjectNode jsonNodes){
+        String receiver = jsonNodes.get("receiver").asText();
+        String sender = jsonNodes.get("sender").asText();
+        return myUsersService.checkConnectionStatus(receiver, sender);
     }
 
 

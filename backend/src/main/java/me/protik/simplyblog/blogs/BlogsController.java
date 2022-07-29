@@ -42,7 +42,7 @@ public class BlogsController {
     void addLikeUnlike(@RequestBody BlogsLikes blogsLikes){
         blogsService.addLikeUnlikeService(blogsLikes);
     }
-    @PostMapping("/blogs/likeunlike/remove/{id}") // Add/Modify User Like On A Blog
+    @PostMapping("/blogs/likeunlike/remove/{id}") // Remove User Like On A Blog
     void removeLikeUnlike(@PathVariable Long id){
         blogsService.removeLikeUnlikeService(id);
     }

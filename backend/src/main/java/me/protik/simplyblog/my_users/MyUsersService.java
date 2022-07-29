@@ -32,7 +32,7 @@ public class MyUsersService {
         return connectionsRepository.findConnectionsByReceiver_UserNameAndAcceptedTrue(userName);
     }
     public List<Connections> showUserPendingListService(String userName){
-        return connectionsRepository.findConnectionsByReceiver_UserNameAndAcceptedFalse(userName);
+        return connectionsRepository.findConnectionsByReceiver_UserNameAndAcceptedFalseAndRequestedTrue(userName);
     }
     public List<Connections> showUserFollowersListService(String userName){
         return connectionsRepository.findConnectionsByReceiver_UserNameAndFollowingIsTrue(userName);
@@ -40,6 +40,13 @@ public class MyUsersService {
     //POST APIs
     public void addModConnectionService(Connections connection){
         connectionsRepository.save(connection);
+    }
+    public void removeConnectionService(Long id){
+        connectionsRepository.deleteById(id);
+    }
+
+    public Connections checkConnectionStatus(String receiver_userName, String sender_userName){
+        return connectionsRepository.findConnectionsByReceiver_UserNameAndSender_UserName(receiver_userName, sender_userName);
     }
 
 }

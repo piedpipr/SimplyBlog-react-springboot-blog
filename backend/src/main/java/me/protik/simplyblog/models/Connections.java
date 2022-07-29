@@ -21,6 +21,7 @@ public class Connections implements Serializable {
     @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
     @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     private MyUsers sender;
+    private boolean requested;
     private boolean accepted;
     private boolean following;
 }
