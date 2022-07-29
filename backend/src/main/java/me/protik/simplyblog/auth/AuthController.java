@@ -4,6 +4,7 @@ import me.protik.simplyblog.auth.models.AuthRequest;
 import me.protik.simplyblog.auth.models.AuthResponse;
 import me.protik.simplyblog.auth.utils.JwtUtil;
 import me.protik.simplyblog.models.MyUsers;
+import me.protik.simplyblog.my_users.MyUsersRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -14,12 +15,15 @@ import org.springframework.web.bind.annotation.*;
 import java.security.Principal;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 
 @RestController
 public class AuthController {
     @Autowired
     private UserDetailsRepository userDetailsRepository;
+    @Autowired
+    private MyUsersRepository myUsersRepository;
     @Autowired
     private JwtUtil jwtUtil;
     @Autowired
@@ -30,8 +34,9 @@ public class AuthController {
         return userDetailsRepository.existsByUserName(userName);
     }
     @GetMapping("/verifyjwt")
-    public String verifyJWT(Principal principal){
-        return principal.getName();
+    public Optional<MyUsers> verifyJWT(Principal principal){
+        return myUsersRepository.findMyUsersByUserName(principal.getName());
+//        return principal.getName();
     }
     @PostMapping("/register")
     public void authRegister(@RequestBody MyUsers regUser){
