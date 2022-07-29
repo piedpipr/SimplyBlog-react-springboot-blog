@@ -10,7 +10,7 @@ interface Props {
 export const AuthProvider = ({ children }: Props) => {
     const [isAuthenticated, setIsAuthenticated] = useState(false);
     const [username, setUsername] = useState('');
-    // const[userId, setUserId] = useState(null);
+    const[userId, setUserId] = useState(null);
     // const[userRole, setUserRole] = useState(null);
     // const[userEmail, setUserEmail] = useState(null);
     const[jwt, setJwt] = useState('');
@@ -28,10 +28,13 @@ export const AuthProvider = ({ children }: Props) => {
                     }
                 });
                 console.log(response);
+                console.log(response.data);
+                console.log(response.data.userName);
                 if(response.status === 200){
                     setJwt(tokenLocal);
                     setIsAuthenticated(true);
-                    setUsername(response.data);
+                    setUsername(response.data.userName);
+                    setUserId(response.data.id);
                     setJwt(tokenLocal);
                 } else setIsAuthenticated(false);
             }catch(err){
@@ -43,7 +46,7 @@ export const AuthProvider = ({ children }: Props) => {
     })
 
     return (
-        <AuthContext.Provider value={{isAuthenticated, setIsAuthenticated, username, setUsername, jwt, setJwt}}>
+        <AuthContext.Provider value={{isAuthenticated, setIsAuthenticated, username, setUsername, userId, setUserId, jwt, setJwt}}>
             {children}
         </AuthContext.Provider>
     );
