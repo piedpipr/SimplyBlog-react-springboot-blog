@@ -62,3 +62,28 @@ export interface LikeStatusType {
             active: boolean,
         }
 }
+
+export interface ConnectionsStatusTypes {
+    id: number,
+    receiver: {
+      id: number,
+      userName: string,
+      password: string,
+      email: string,
+      bio: string,
+      roles: string,
+      active: boolean,
+    },
+    sender: {
+      id: number,
+      userName: string,
+      password: string,
+      email: string,
+      bio: string,
+      roles: string,
+      active: boolean,
+    },
+    requested: boolean,
+    accepted: boolean,
+    following: boolean,
+}
