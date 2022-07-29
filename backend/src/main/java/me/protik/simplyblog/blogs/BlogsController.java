@@ -38,9 +38,13 @@ public class BlogsController {
     BlogsLikes getBlogUserLikeStatus(@PathVariable Long id, @PathVariable String userName){
         return blogsService.blogLikeStatus(id, userName, userName);
     }
-    @PostMapping("/blogs/likeunlike") // Add/Modify User Like On A Blog
-    void addLikeUnlikeTest(@RequestBody BlogsLikes blogsLikes){
+    @PostMapping("/blogs/likeunlike/") // Add/Modify User Like On A Blog
+    void addLikeUnlike(@RequestBody BlogsLikes blogsLikes){
         blogsService.addLikeUnlikeService(blogsLikes);
+    }
+    @PostMapping("/blogs/likeunlike/remove/{id}") // Add/Modify User Like On A Blog
+    void removeLikeUnlike(@PathVariable Long id){
+        blogsService.removeLikeUnlikeService(id);
     }
     @GetMapping("/blogs/likes/{id}") // No Of Unlikes Received By A Blog
     Integer noOfLikesBlog(@PathVariable Long id){

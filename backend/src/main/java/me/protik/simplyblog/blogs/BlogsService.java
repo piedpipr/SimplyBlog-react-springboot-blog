@@ -45,6 +45,10 @@ public class BlogsService {
     void addLikeUnlikeService(BlogsLikes bloglike) {
         blogsLikesRepository.save(bloglike);
     }
+    void removeLikeUnlikeService(Long id) {
+        blogsLikesRepository.deleteById(id);
+    }
+
 
     Integer noOfLikes(Long blogId) {
         AtomicReference<Integer> count = new AtomicReference<>(0);
