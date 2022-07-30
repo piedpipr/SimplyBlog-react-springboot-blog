@@ -1,5 +1,6 @@
 import { useState, useEffect} from 'react'
-import { NavLink } from 'react-router-dom';
+import { NavLink, Link } from 'react-router-dom';
+import { Card, Form, Button } from 'react-bootstrap';
 import axios from '../api/axios';
 
 const REGISTER_API = '/register';
@@ -61,19 +62,58 @@ export default function Register({}: Props) {
     console.log('Data Submitted')};
     
   return (
-    <>
-    {success ? (<div><h2>Success</h2><h3><NavLink to="/login">Go to Login</NavLink></h3></div>) :
-    (<div style={{display: 'flex', flexDirection:'column', alignItems: 'center', justifyContent: 'center'}}>
-        <h1>Register/Sign Up</h1>
-        {(errrormsg && errrormsg==="Username available..") &&
-        (<div className='bg-green-100 border border-green-400 text-green-700 px-10 py-0 rounded relative" role="alert"'>
+    <div className='container'>
+    {success ? (<div className='text-center'><h2>Success</h2><h3><NavLink to="/login">Go to Login</NavLink></h3></div>) :
+    (<div>
+      <h1 className='text-center mx-auto mt-5'>Register/Sign Up</h1>
+      <div onSubmit={handleSubmit}>
+      <Card className='m-5 p-2 w-50 mx-auto'>
+      <div className='text-center mx-auto'>
+      {(errrormsg && errrormsg==="Username available..") &&
+        (<div className='alert alert-success p-0 mb-0 border-0'>
         <p aria-live="assertive">{errrormsg}</p>
         </div>)}
         {(errrormsg && (errrormsg==="Username alredy exists.." || errrormsg==="Server Error")) &&
-        (<div className='bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative" role="alert"'>
+        (<div className='alert alert-danger p-0 mb-0 border-0'>
         <p aria-live="assertive">{errrormsg}</p>
       </div>)}
-      <form onSubmit={handleSubmit} style={{display: 'flex', flexDirection:'column', alignItems: 'center', justifyContent: 'center'}}>
+      </div>
+      <Form className='m-5 mt-4'>
+      <Form.Group className="mb-3" controlId="formBasicEmail">
+        <Form.Label>Username</Form.Label>
+        <Form.Control 
+          type="text"
+          placeholder="Username (min 5 characters)"
+          id="username"
+          autoComplete="off"
+          value={username}
+          onChange={(e:any) => setUsername(e.target.value)}
+          required/>
+      </Form.Group>
+
+      <Form.Group className="mb-3" controlId="formBasicPassword">
+        <Form.Label>Password</Form.Label>
+        <Form.Control 
+          type="password" 
+          placeholder="Password"
+          id="password"
+          onChange={(e:any) => setPassword(e.target.value)}
+          required />
+      </Form.Group>
+      <div className='text-center'>
+      <Button variant="primary" type="submit" disabled={isError} >
+        Login
+      </Button>
+      <Form.Text className="text-muted">
+          <br />Already have a account! go to <Link to='/login'>Login</Link>
+        </Form.Text>
+      </div>
+    </Form>
+    </Card>
+    </div>
+
+
+      {/* <form onSubmit={handleSubmit} style={{display: 'flex', flexDirection:'column', alignItems: 'center', justifyContent: 'center'}}>
           <label htmlFor="username">Username:</label>
           <input 
             type="text"
@@ -91,8 +131,8 @@ export default function Register({}: Props) {
             onChange={(e:any) => setPassword(e.target.value)}
             required/>  
           <button type="submit" disabled={isError} className='bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded'>Register</button>
-      </form>
+      </form> */}
     </div>)}
-    </>
+    </div>
   )
 }
