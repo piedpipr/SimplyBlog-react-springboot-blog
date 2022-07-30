@@ -1,4 +1,4 @@
-import *  as React from 'react';
+import { useState, useEffect } from 'react';
 import { NavLink } from 'react-router-dom';
 import {LinkContainer} from 'react-router-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -7,6 +7,7 @@ import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
+import useAuth from '../hooks/useAuth';
 
 export interface NavbarProps {
 }
@@ -14,16 +15,14 @@ export interface NavbarProps {
 export interface NavbarState {
 }
 
-export default class SiteNavbar extends React.Component<NavbarProps, NavbarState> {
-  constructor(props: NavbarProps) {
-    super(props);
+export default function SiteNavbar(props: NavbarProps) {
+  const userAuth = useAuth();
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
-    this.state = {
-    }
-  }
-
-  public render() {
-    return (
+  useEffect(()=>{
+    setIsLoggedIn(userAuth.isAuthenticated);
+  },[userAuth])
+  return (
     <div>
       <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
       <Container>
@@ -45,14 +44,19 @@ export default class SiteNavbar extends React.Component<NavbarProps, NavbarState
               </NavDropdown.Item>
             </NavDropdown>
           </Nav>
+          {isLoggedIn?(
+          <Nav>
+          <LinkContainer to="/" onClick={()=>{localStorage.removeItem("token");userAuth.setIsAuthenticated(false)}}><Nav.Link>Logout({userAuth.username}) <FontAwesomeIcon icon={ faSignOut }/></Nav.Link></LinkContainer>
+          </Nav>
+          ):(
           <Nav>
           <LinkContainer to="login"><Nav.Link>Log In<FontAwesomeIcon icon={ faSignIn }/></Nav.Link></LinkContainer>
           <LinkContainer to="register"><Nav.Link>Register <FontAwesomeIcon icon={ faSignOut }/></Nav.Link></LinkContainer>
           </Nav>
+          )}
         </Navbar.Collapse>
       </Container>
     </Navbar>
     </div>
     );
-  }
 }

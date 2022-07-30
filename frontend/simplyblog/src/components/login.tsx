@@ -4,6 +4,7 @@ import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import { Card } from 'react-bootstrap';
 import { Link, useNavigate } from 'react-router-dom';
+import useAuth from '../hooks/useAuth';
 
 const LOGIN_API = '/authenticate';
 type Props = {}
@@ -12,6 +13,8 @@ export default function Login({}: Props) {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [success, setSuccess] = useState(false);
+
+  const userAuth = useAuth();
 
   const navigate = useNavigate();
 
@@ -29,6 +32,7 @@ export default function Login({}: Props) {
       );
     console.log(response.data.jwt);
     localStorage.setItem('token', response.data.jwt);
+    userAuth.setIsAuthenticated(true);
     setSuccess(true);
   }
   return (

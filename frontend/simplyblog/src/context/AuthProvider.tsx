@@ -43,7 +43,7 @@ export const AuthProvider = ({ children }: Props) => {
         }
         verifyToken();
     }
-    })
+    },[isAuthenticated])
 
     return (
         <AuthContext.Provider value={{isAuthenticated, setIsAuthenticated, username, setUsername, userId, setUserId, jwt, setJwt}}>
