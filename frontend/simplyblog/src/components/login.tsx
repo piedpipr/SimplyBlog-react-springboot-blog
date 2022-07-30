@@ -33,7 +33,10 @@ export default function Login({}: Props) {
     console.log(response.data.jwt);
     localStorage.setItem('token', response.data.jwt);
     userAuth.setIsAuthenticated(true);
+    await new Promise(r => setTimeout(r, 500));
     setSuccess(true);
+    
+    
   }
   return (
     <div>
