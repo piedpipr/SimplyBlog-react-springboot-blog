@@ -36,7 +36,7 @@ A full-stack blog written in Java and TypeScript using Spring Boot and Reactjs.
           spring.jpa.properties.hibernate.show_sql=true
           
   4. Once the source building and dependecies are ready and ```application.properties``` is configured, run the App using 
-     Application configuration or just run if the provided confihuration is available. // We're not running the build version here
+     Application configuration or just run if the provided configuration is available. // We're running only the development version here since it's basic
 
 ### Frontend:
 
