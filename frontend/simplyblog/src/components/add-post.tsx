@@ -62,7 +62,7 @@ export default function AddPost({}: Props) {
         <Form.Label>Blog Text</Form.Label>
         <Form.Control 
           type="text"
-          style={{height: '600px'}}
+          style={{height: '300px'}}
           id="body" 
           placeholder="Start writing here"
           onChange={(e) => setBody(e.target.value)}
