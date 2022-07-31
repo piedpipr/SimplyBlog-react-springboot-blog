@@ -2,6 +2,9 @@
 A full-stack blog with register, sign in, blog, add blog, follow and add connection functionality
 
 #### :rocket: Deplyment: https://simplyblog.vercel.app/
+![Screen Shot 2022-07-31 at 07 02 55](https://user-images.githubusercontent.com/43669876/182005280-672c6f90-3d6b-42b3-97dc-ec3bf56fa20d.png)
+
+
 
 ## Quick Setup Guide
 
