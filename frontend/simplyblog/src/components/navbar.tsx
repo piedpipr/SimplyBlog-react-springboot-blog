@@ -30,7 +30,7 @@ export default function SiteNavbar(props: NavbarProps) {
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
         <Navbar.Collapse id="responsive-navbar-nav">
           <Nav className="me-auto">
-          <LinkContainer to="add"><Nav.Link><FontAwesomeIcon icon={ faNoteSticky }/> Add Post</Nav.Link></LinkContainer>
+          <LinkContainer to="blog/add"><Nav.Link><FontAwesomeIcon icon={ faNoteSticky }/> Add Post</Nav.Link></LinkContainer>
           <LinkContainer to="profile"><Nav.Link><FontAwesomeIcon icon={ faGear }/> Profile</Nav.Link></LinkContainer>
             <NavDropdown title="More" id="collasible-nav-dropdown">
               <NavDropdown.Item>Dummy Menu</NavDropdown.Item>
