@@ -175,14 +175,14 @@ export default function PublicProfile({}: Props) {
       <Card.Body>
         { userAuth.isAuthenticated && connectionStatus?.sender?.userName === userAuth.username &&
         <div className='text-center'>
-          { (connectionStatus?.requested===false) && <Button onClick={()=> handleConnectionsStatus('add')} variant="primary" className='me-2'>Add</Button> }
+          { (connectionStatus?.requested===false && connectionStatus?.accepted===false) && <Button onClick={()=> handleConnectionsStatus('add')} variant="primary" className='me-2'>Add</Button> }
           { connectionStatus?.requested && <Button onClick={()=> handleConnectionsStatus('remove')} variant="primary" className='me-2'>Requested</Button> }
           { connectionStatus?.accepted && <Button onClick={()=> handleConnectionsStatus('remove')} variant="primary" className='me-2'>Remove</Button> }
           { connectionStatus?.following && <Button onClick={()=> handleConnectionsStatus('unfollow')} variant="primary">Unfollow</Button> }
           { (connectionStatus?.following===false) && <Button onClick={()=> handleConnectionsStatus('follow')} variant="primary">Follow</Button> }
         </div>
         }
-        {userAuth.isAuthenticated && connectionStatus?.sender?.userName !== userAuth.username &&
+        {(userAuth.isAuthenticated && !connectionStatus && (userAuth.username!==userName)) &&
         <div className='text-center'>
           <Button onClick={()=> handleConnectionsStatus('add')} variant="primary" className='me-2'>Add</Button>
           <Button onClick={()=> handleConnectionsStatus('follow')} variant="primary">Follow</Button>
