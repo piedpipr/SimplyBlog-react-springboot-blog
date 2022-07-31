@@ -28,6 +28,9 @@ public class MyUsersService {
 
 //User Connections Services
     //GET APIs
+    public List<Connections> alltypeConnectionsUserService(String userName){
+        return connectionsRepository.findConnectionsByReceiver_UserName(userName);
+    }
     public List<Connections> showUserConnectionsListService(String userName){
         return connectionsRepository.findConnectionsByReceiver_UserNameAndAcceptedTrue(userName);
     }

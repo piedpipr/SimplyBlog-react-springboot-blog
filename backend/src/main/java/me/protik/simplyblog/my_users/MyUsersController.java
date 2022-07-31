@@ -29,6 +29,10 @@ public class MyUsersController {
 
 
     //Connections APIs
+    @GetMapping("/user/connections-all-type/{userName}")
+    public List<Connections> getAllTypeConnectionsUSer(@PathVariable String userName){
+        return myUsersService.alltypeConnectionsUserService(userName);
+    }
     @GetMapping("/user/connections/{userName}")
     public List<Connections> userConnections(@PathVariable String userName){
         return myUsersService.showUserConnectionsListService(userName);
