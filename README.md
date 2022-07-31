@@ -1,4 +1,4 @@
-# SimplyBlog-react-springboot-microblog
+# SimplyBlog-react-springboot-blog
 A full-stack blog written in Java and TypeScript using Spring Boot and Reactjs.
 
 #### Funtionalities achieved :
