@@ -102,7 +102,7 @@ export default function Register({}: Props) {
       </Form.Group>
       <div className='text-center'>
       <Button variant="primary" type="submit" disabled={isError} >
-        Login
+        Register
       </Button>
       <Form.Text className="text-muted">
           <br />Already have a account! go to <Link to='/login'>Login</Link>
