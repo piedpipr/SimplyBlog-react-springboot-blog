@@ -3,7 +3,7 @@ A full-stack blog with register, sign in, blog, add blog, follow and add connect
 
 #### :rocket: Deplyment: https://simplyblog.vercel.app/
 
-## Quick Setup upuide
+## Quick Setup Guide
 
 ### MySQL Setup:
 
