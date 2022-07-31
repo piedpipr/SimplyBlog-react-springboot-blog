@@ -6,7 +6,7 @@ A full-stack blog written in Java and TypeScript using Spring Boot and Reactjs.
     📦Register/Login, Add Blog Post, Like/Unlike Blog Post,
     📦Send Connection Request, Add Connection, Follow             
 
-#### :rocket: Deplyment: https://simplyblog.vercel.app/
+#### :rocket: Deployment: https://simplyblog.vercel.app/
 <img src="https://user-images.githubusercontent.com/43669876/182005280-672c6f90-3d6b-42b3-97dc-ec3bf56fa20d.png" width="800" height="550">
 
 
