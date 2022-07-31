@@ -7,6 +7,8 @@ A full-stack blog written in Java and TypeScript using Spring Boot and Reactjs.
     📦Send Connection Request, Add Connection, Follow             
 
 #### :rocket: Deployment: https://simplyblog.vercel.app/
+Please give it max 45 seconds for backend to wakeup if data/post are now showing, as heroku default apps are put into sleep due to inactivity
+
 <img src="https://user-images.githubusercontent.com/43669876/182005280-672c6f90-3d6b-42b3-97dc-ec3bf56fa20d.png" width="800" height="550">
 
 
