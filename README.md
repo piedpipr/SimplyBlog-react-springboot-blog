@@ -15,7 +15,7 @@ A full-stack blog written in Java and TypeScript using Spring Boot and Reactjs.
 
 ### MySQL Setup:
 
-  1. Use a preffered MySQL for your system(os) and create a database named ```simply-blog``
+  1. Use a preffered MySQL for your system(os) and create a database named ```simply-blog```
   2. Run the MySQL Server
   
 ### Backend: 
